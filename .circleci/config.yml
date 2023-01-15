@@ -13,7 +13,7 @@ jobs:
       - persist_to_workspace:
           root: path
           paths:
-            - path/output.txt
+            - ./path
   print_output_file:
     docker:
       - image: alpine:latest
