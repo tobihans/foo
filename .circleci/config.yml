@@ -19,3 +19,4 @@ workflows:
   hello-workflow:
     jobs:
       - hello
+      - print_env
