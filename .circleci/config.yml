@@ -13,14 +13,14 @@ jobs:
       - persist_to_workspace:
           root: path
           paths:
-            - output.txt
+            - path/output.txt
   print_output_file:
     docker:
       - image: alpine:latest
     steps:
       - attach_workspace:
           at: path
-      - run: ls -l && cat path/output.txt || true
+      - run: ls -l path && cat path/output.txt || true
 
 workflows:
   hello-workflow:
