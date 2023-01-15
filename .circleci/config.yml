@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: "Save hello to file"
-          command: "echo 'Hello, World!' > output.txt"
+          command: "echo 'Hello, World!' > /tmp/output.txt"
       - persist_to_workspace:
           root: /tmp
           paths:
