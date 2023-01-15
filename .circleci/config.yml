@@ -20,7 +20,7 @@ jobs:
     steps:
       - attach_workspace:
           at: path
-      - run: ls && cat path/output.txt || true
+      - run: ls -l && cat path/output.txt || true
 
 workflows:
   hello-workflow:
