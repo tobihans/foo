@@ -1,22 +1,28 @@
 version: 2.1
 
 jobs:
-  hello:
+  save_hello_world_output:
     docker:
       - image: alpine:latest
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-  print_env:
+          name: "Save hello to file"
+          command: "echo 'Hello, World!' > output.txt"
+      - persist_to_workspace:
+          root: /tmp/dir
+          paths:
+            - output.txt
+  print_output_file:
     docker:
       - image: alpine:latest
     steps:
-      - run: "echo Env var HANS: $HANS"
+      - attach_workspace:
+          at: /tmp/dir
+      - run: cat /tmp/dir/output.txt
 
 workflows:
   hello-workflow:
     jobs:
-      - hello
-      - print_env
+      - save_hello_world_output
+      - print_output_file
