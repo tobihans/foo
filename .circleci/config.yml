@@ -19,7 +19,7 @@ jobs:
     steps:
       - attach_workspace:
           at: /tmp
-      - run: cat /tmp/dir/output.txt
+      - run: cat /tmp/output.txt
 
 workflows:
   hello-workflow:
