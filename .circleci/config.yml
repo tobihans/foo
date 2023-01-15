@@ -1,26 +1,33 @@
 version: 2.1
 
+commands:
+  print_pipeline_id:
+    description: "Prints CIRCLE_WORKFLOW_ID  env var"
+    steps:
+      - run: echo $CIRCLE_WORKFLOW_ID
+
 jobs:
   save_hello_world_output:
     docker:
       - image: alpine:latest
     steps:
       - checkout
-      - run: mkdir path
+      - print_pipeline_id
+      - run: "mkdir ~/path"
       - run:
           name: "Save hello to file"
-          command: "echo 'Hello, World!' > path/output.txt"
+          command: "echo 'Hello, World!' > ~/path/output.txt"
       - persist_to_workspace:
-          root: path
+          root: ~/path
           paths:
-            - ./path
+            - output.txt
   print_output_file:
     docker:
       - image: alpine:latest
     steps:
       - attach_workspace:
-          at: path
-      - run: ls -l path && cat path/output.txt || true
+          at: ~/path
+      - run: ls -l ~/path && cat ~/path/output.txt || true
 
 workflows:
   hello-workflow:
