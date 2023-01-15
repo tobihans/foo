@@ -28,6 +28,10 @@ jobs:
       - attach_workspace:
           at: ~/path
       - run: ls -l ~/path && cat ~/path/output.txt || true
+      - run:
+          name: On failure
+          when: on_fail
+          command: "echo an error occured"
 
 workflows:
   hello-workflow:
