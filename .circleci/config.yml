@@ -10,7 +10,7 @@ jobs:
           name: "Save hello to file"
           command: "echo 'Hello, World!' > output.txt"
       - persist_to_workspace:
-          root: /tmp/dir
+          root: /tmp
           paths:
             - output.txt
   print_output_file:
@@ -18,7 +18,7 @@ jobs:
       - image: alpine:latest
     steps:
       - attach_workspace:
-          at: /tmp/dir
+          at: /tmp
       - run: cat /tmp/dir/output.txt
 
 workflows:
